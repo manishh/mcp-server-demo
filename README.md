@@ -78,11 +78,11 @@ $ uv run currency.py
 
 You may also test the MCP server by listing its tools using:
 
-```
+```bash
 python test_mcp.py
 ```
 
-This should show you the JSON for available tools. This is helpful in understanding MCP's standardized response. 
+This should show you the JSON for available tools. The test code uses raw JSON-RPC requests, and it is helpful for understanding MCP's standardized request-response. 
 
 ## Integrating with Claude for Desktop:
 
@@ -92,16 +92,16 @@ Ensure you have [Claude Desktop](https://claude.ai/download) available on your c
 {
   "mcpServers": {
     "currency": {
-      "command": "/absolute-path-to-executable/uv",
-      "args": [
-    "--directory",
-    "/absolute-path-to/mcp-server-demo",
-        "run",       
-        "currency.py"
-      ],
-      "env": {
-    "CURRENCY_API_KEY": "<your-API-key>"
-      }
+        "command": "/absolute-path-to-executable/uv",
+        "args": [
+          "--directory",
+          "/absolute-path-to/mcp-server-currency",
+          "run",
+          "currency.py"
+        ],
+        "env": {
+          "CURRENCY_API_KEY": "<your-API-key>"
+        }
     }
   }
 }

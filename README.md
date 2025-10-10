@@ -86,7 +86,7 @@ This should show you the JSON for available tools. The test code uses raw JSON-R
 
 ## Integrating with Claude for Desktop:
 
-Ensure you have [Claude Desktop](https://claude.ai/download) available on your computer/laptop. Use the following configuration for Claude Desktop's `claude_desktop_config.json`:
+Ensure you have [Claude Desktop](https://claude.ai/download) available on your computer/laptop. Use the following configuration for Claude Desktop's `claude_desktop_config.json` (see [this](https://modelcontextprotocol.info/docs/quickstart/user/#-step-2-configure-mcp-2-minutes)):
 
 ```json
 {

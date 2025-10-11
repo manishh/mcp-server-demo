@@ -109,6 +109,11 @@ Ensure you have [Claude Desktop](https://claude.ai/download) available on your c
 
 > **Note:** You will be able to use locally running MCP server with Claude's free plan as well.
 
+## How Claude-MCP Server Integration Works
+
+![How Claude-MCP Server Integration Works](./media/claude-mcp-interaction.png)
+
+
 ## Currency MCP Server In Action:
 
 ![Demo: Currency Conversion MCP Tool in Action](./media/currency-MCP-demo.png)

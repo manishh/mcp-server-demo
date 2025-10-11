@@ -40,7 +40,6 @@ Latest {rates.get('currency_name', to_currency)} Rate: {rates.get('rate', 'Unkno
 """
 
 
-
 ##############################################################################
 #
 # Different MCP tools here
@@ -48,7 +47,51 @@ Latest {rates.get('currency_name', to_currency)} Rate: {rates.get('rate', 'Unkno
 ##############################################################################
 
 
+@mcp.tool()
+async def convert_currency(amount: float, from_currency: str, to_currency: str) -> str:
+    """Converts the given amount from one currency to another.
 
+    Args:
+        amount: Amount to be converted.
+        from_currency: Three letter currency code (e.g. USD, INR, GBP, EUR)
+        to_currency: Three letter currency code (e.g. USD, INR, GBP, EUR)
+
+    Returns:
+        str: Converted amount with currency rate.
+    """
+    
+    api_endpoint = f"{CURRENCY_API_BASE}/v2/currency/convert?api_key={API_KEY}&from={from_currency}&to={to_currency}&amount={amount}&format=json"
+    data = await _send_api_request(api_endpoint)
+
+    if not data or "rates" not in data or not data["rates"]:
+        return "Unable to perform currency conversion at this time."
+
+    # get relevant data for the converted currency
+    conversion_data = data.get("rates", {}).get(to_currency, {})
+    return _format_conversion(conversion_data, to_currency)
+
+
+@mcp.tool()
+async def list_currencies() -> dict[str, str] | str:
+    """Lists all the currencies available for conversion.
+    
+    Returns:
+        dict: List of all available currencies.
+    """
+    
+    api_endpoint = f"{CURRENCY_API_BASE}/v2/currency/list?api_key={API_KEY}&format=json"
+    data = await _send_api_request(api_endpoint)
+
+    if not data or "currencies" not in data or not data["currencies"]:
+        return "Unable to list available currencies at this time."
+
+    available_currencies = data.get("currencies", {})
+    return  available_currencies
+
+
+##############################################################################
+# Run the MCP server
+##############################################################################
 
 
 if __name__ == "__main__":
